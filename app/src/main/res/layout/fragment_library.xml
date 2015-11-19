@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#8087CEFA"
+
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:padding="20dp"
+        android:text="馆藏书目查询"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:layout_margin="20dp"
+        android:padding="5dp"
+        android:id="@+id/et_library_bookName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入要检索的书目信息"
+        android:singleLine="true"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btn_library_quarry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#400000AA"
+        android:layout_margin="40dp"
+        android:text="查找" />
+
+</LinearLayout>
