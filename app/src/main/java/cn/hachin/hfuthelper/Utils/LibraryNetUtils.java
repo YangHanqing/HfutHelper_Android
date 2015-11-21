@@ -1,6 +1,5 @@
 package cn.hachin.hfuthelper.Utils;
 
-import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import org.apache.http.HttpHost;
@@ -9,13 +8,10 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
-
-import cn.hachin.hfuthelper.Entity.Book;
 
 /**
  * Created by yanghanqing on 15/11/18.
@@ -73,14 +69,7 @@ public class LibraryNetUtils {
             client = new DefaultHttpClient();
             HttpResponse response = client.execute(httpHost, get);
 
-            int statusCode = response.getStatusLine().getStatusCode();
-            if (statusCode == 200) {
-                InputStream is = response.getEntity().getContent();
-                text = NetUtils.getStringFromInputStream(is);
-
-            } else {
-                Log.i(TAG, "code " + statusCode);
-            }
+            text = getString(text, response);
 
         } catch (Exception e1) {
             e1.printStackTrace();
@@ -92,24 +81,29 @@ public class LibraryNetUtils {
     public static String getLocation(String url) {
         String text = null;
         try {
-            HttpClient client = new DefaultHttpClient();
+            client = new DefaultHttpClient();
             HttpGet get=new HttpGet(url);
             HttpResponse response = client.execute(get);
 
-            int statusCode = response.getStatusLine().getStatusCode();
-            if (statusCode == 200) {
-                InputStream is = response.getEntity().getContent();
-                text = NetUtils.getStringFromInputStream(is);
-
-            } else {
-                Log.i(TAG, "code " + statusCode);
-            }
+            text = getString(text, response);
 
         } catch (Exception e1) {
             e1.printStackTrace();
         }
 
 
+        return text;
+    }
+
+    private static String getString(String text, HttpResponse response) throws IOException {
+        int statusCode = response.getStatusLine().getStatusCode();
+        if (statusCode == 200) {
+            InputStream is = response.getEntity().getContent();
+            text = Tools.getStringFromInputStream(is);
+
+        } else {
+            Log.i(TAG, "code " + statusCode);
+        }
         return text;
     }
 }

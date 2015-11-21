@@ -8,6 +8,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -259,4 +262,25 @@ public class Tools {
     }
 
 
+    public static String getStringFromInputStream(InputStream is) throws IOException {
+        //模版代码 输入流转化为String
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        int len = -1;
+
+        while ((len = is.read(buffer)) != -1) {
+            baos.write(buffer, 0, len);
+        }
+        is.close();
+
+        String html = baos.toString();
+        String charset = "gbk"; // 把流中的数据转换成字符串, 采用的编码是: gbk
+        if (html.contains("utf-8")) {        // 如果包含utf-8编码, 就采用utf-8编码进行对字符串编码
+            charset = "utf-8";
+        }
+        html = new String(baos.toByteArray(), charset);    // 对原有的字节数组进行使用处理后的编码名称进行编码
+        baos.close();
+        return html;
+    }
 }
