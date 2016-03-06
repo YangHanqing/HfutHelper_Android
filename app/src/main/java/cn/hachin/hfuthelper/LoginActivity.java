@@ -81,7 +81,7 @@ public class LoginActivity extends Activity {
                                 });
                                 return;
                             }
-                            Dao.savaUserInfo(getApplicationContext(), username, password);
+                            Dao.saveUserInfo(getApplicationContext(), username, password);
                             if(courses==null){//如果学校数据出错
                                 runOnUiThread(new Runnable() {
                                     @Override

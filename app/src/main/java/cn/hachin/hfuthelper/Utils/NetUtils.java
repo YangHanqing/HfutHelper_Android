@@ -143,7 +143,7 @@ public class NetUtils {
 
     @NonNull
     private static List<NameValuePair> setPostParameters(String userName, String password) {
-        List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+        List<NameValuePair> parameters = new ArrayList<>();
         parameters.add(new BasicNameValuePair("IDToken0", ""));
         parameters.add(new BasicNameValuePair("IDToken1", userName));
         parameters.add(new BasicNameValuePair("IDToken2", password));
